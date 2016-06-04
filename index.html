@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome</title>
+    <script src='js/react.js'></script>
+    <script src='js/react-dom.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js'></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type='text/babel'>
+        var Navbar = React.createClass({
+            propTypes: {
+                brand: React.PropTypes.string.isRequired
+            },
+            getDefaultProps: function(){
+                return {
+                    brand: 'React Experiment',
+                    color: 'light'
+                }
+            },
+            render: function(){
+                if(this.props.color == 'dark') {
+                    var navClass = 'navbar navbar-dark bg-inverse';
+                } else {
+                    var navClass = 'navbar navbar-light bg-faded';
+                }
+
+                var homeActive = '';
+                var aboutActive = '';
+
+                if(this.props.page == 'home'){
+                    homeActive = 'active';
+                } else if(this.props.page == 'about') {
+                    aboutActive = 'active';
+                }
+                return(
+                    <div>
+                        <nav className={navClass}>
+                            <a className="navbar-brand" href="#">{this.props.brand}</a>
+                            <ul className="nav navbar-nav">
+                                <li className={homeActive}>
+                                    <a onClick={this.props.homeClick} className="nav-link" href="#">Home</a>
+                                </li>
+                                <li className={aboutActive}>
+                                    <a onClick={this.props.aboutClick} className="nav-link" href="#">About</a>
+                                </li>
+                            </ul>
+                            <form className="form-inline pull-xs-right">
+                                <input className="form-control" type="text" placeholder="Search" />
+                                <button className="btn btn-success-outline" type="submit">Search</button>
+                            </form>
+                        </nav>
+                    </div>
+        ) } });
+
+        // Jumbotron Component
+        var Jumbotron = React.createClass({
+            PropTypes: {
+                heading: React.PropTypes.string,
+                text: React.PropTypes.string,
+                link: React.PropTypes.string
+            },
+            getDefaultProps: function(){
+                return {
+                    heading: 'I am a batman!',
+                    text: 'Nothing can stop me from exploring and enjoying life!!!',
+                    link: 'https://www.google.com'
+                }
+            },
+            render: function() {
+                return(
+                     <div className="jumbotron">
+                        <div className="container">
+                            <h1 className="display-3">{this.props.heading}</h1>
+                            <p>{this.props.text}</p>
+                            <p><a className="btn btn-primary btn-lg" href={this.props.link} role="button">Learn more &raquo;</a></p>
+                        </div>
+                    </div>
+                )
+            }
+        });
+
+        // Homepage Component
+        var PageHome = React.createClass({
+            render: function() {
+                return(
+                    <div className="container">
+                        <div className="row">
+                            I am a superman. Nothing can stop me from achieving my own happiness and my own life.
+                        </div>
+                    </div>
+                )
+            }
+        });
+
+        // AboutPage Component
+        var AboutPage = React.createClass({
+            render: function() {
+                return(
+                    <div className="container">
+                        <div className="row">
+                            <h2 className='page-header'>This is about me and my life.</h2>
+                            <p>I am happy everyday!!!</p>
+                        </div>
+                    </div>
+                )
+            }
+        });
+
+        // Footer Component
+        var Footer = React.createClass({
+            getDefaultProps: function(){
+                return {
+                    website: 'React Experiment',
+                    copy_year: 2016
+                }
+            },
+            render: function() {
+                return (
+                    <div>
+                        <hr />
+                        <footer>
+                            <p>&copy; {this.props.copy_year} {this.props.website}</p>
+                        </footer>
+                    </div>
+                )
+            }
+        });
+
+        // Main App Component
+        var App = React.createClass({
+            getInitialState: function() {
+                return {
+                    page: 'home'
+                }
+            },
+            handleHomeClick: function() {
+                this.setState({
+                    page: 'home'
+                })
+            },
+            handleAboutClick: function() {
+                this.setState({
+                    page: 'about'
+                })
+            },
+            render: function() {
+                if(this.state.page == 'home') {
+                    var jumbotron = <Jumbotron />
+                    var page = <PageHome />
+                } else if(this.state.page = 'about') {
+                    var jumbotron = '';
+                    var page = <AboutPage />
+                }
+                return(
+                    <div>
+                        <Navbar
+                            color='dark'
+                            page={this.state.page}
+                            homeClick={this.handleHomeClick}
+                            aboutClick={this.handleAboutClick}
+                        />
+                        {jumbotron}
+                        {page}
+                        <Footer />
+                    </div>
+                )
+            }
+        });
+
+        ReactDOM.render(
+            <App />, document.getElementById('app')
+        );
+    </script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')
+    </script>
+    <script>
+    (function(b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+            function() {
+                (b[l].q = b[l].q || []).push(arguments)
+            });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+    </script>
+</body>
+
+</html>
