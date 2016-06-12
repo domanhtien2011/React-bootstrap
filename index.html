@@ -8,7 +8,7 @@
     <script src='js/react.js'></script>
     <script src='js/react-dom.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js'></script>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,189 +19,189 @@
 
     <script type='text/babel'>
         var Navbar = React.createClass({
-            propTypes: {
+            PropTypes: {
                 brand: React.PropTypes.string.isRequired
             },
             getDefaultProps: function(){
-                return {
-                    brand: 'React Experiment',
+                return{
+                    brand: 'Everything is just an illusion',
                     color: 'light'
                 }
             },
+            // render function is required in every component in reactjs
             render: function(){
-                if(this.props.color == 'dark') {
-                    var navClass = 'navbar navbar-dark bg-inverse';
+                if(this.props.color == 'dark'){
+                    var navClass = 'navbar navbar-inverse';
                 } else {
-                    var navClass = 'navbar navbar-light bg-faded';
+                    var navClass = 'navbar navbar-default';
                 }
 
                 var homeActive = '';
                 var aboutActive = '';
 
-                if(this.props.page == 'home'){
-                    homeActive = 'active';
-                } else if(this.props.page == 'about') {
-                    aboutActive = 'active';
+                if (this.props.page == 'home') {
+                  homeActive = 'active';
+                } else if(this.props.page == 'about'){
+                  aboutActive = 'active';
                 }
+
                 return(
                     <div>
                         <nav className={navClass}>
-                            <a className="navbar-brand" href="#">{this.props.brand}</a>
-                            <ul className="nav navbar-nav">
-                                <li className={homeActive}>
-                                    <a onClick={this.props.homeClick} className="nav-link" href="#">Home</a>
-                                </li>
-                                <li className={aboutActive}>
-                                    <a onClick={this.props.aboutClick} className="nav-link" href="#">About</a>
-                                </li>
-                            </ul>
-                            <form className="form-inline pull-xs-right">
-                                <input className="form-control" type="text" placeholder="Search" />
-                                <button className="btn btn-success-outline" type="submit">Search</button>
-                            </form>
+                            <div className="container-fluid">
+                                <div className="navbar-header">
+                                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <span className="sr-only">Toggle navigation</span>
+                                        <span className="icon-bar"></span>
+                                        <span className="icon-bar"></span>
+                                        <span className="icon-bar"></span>
+                                    </button>
+                                    <a className="navbar-brand" href="#">{this.props.brand}</a>
+                                </div>
+                                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul className="nav navbar-nav">
+                                        <li className={homeActive}><a onClick={this.props.homeClick} href="#">Home </a></li>
+                                        <li className={aboutActive}><a onClick={this.props.aboutClick} href="#">About</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </nav>
                     </div>
-        ) } });
+                )
+            }
+        });
 
-        // Jumbotron Component
         var Jumbotron = React.createClass({
-            PropTypes: {
+            propTypes: {
                 heading: React.PropTypes.string,
                 text: React.PropTypes.string,
                 link: React.PropTypes.string
             },
             getDefaultProps: function(){
                 return {
-                    heading: 'I am a batman!',
-                    text: 'Nothing can stop me from exploring and enjoying life!!!',
-                    link: 'https://www.google.com'
+                    heading: 'Computer is real!!!',
+                    text: 'I should eat, sleep, and have sex with my computer from now on, for a year!!!',
+                    link: 'https://www.quora.com'
                 }
             },
-            render: function() {
-                return(
-                     <div className="jumbotron">
-                        <div className="container">
-                            <h1 className="display-3">{this.props.heading}</h1>
-                            <p>{this.props.text}</p>
-                            <p><a className="btn btn-primary btn-lg" href={this.props.link} role="button">Learn more &raquo;</a></p>
-                        </div>
-                    </div>
-                )
-            }
-        });
-
-        // Homepage Component
-        var PageHome = React.createClass({
-            render: function() {
-                return(
-                    <div className="container">
-                        <div className="row">
-                            I am a superman. Nothing can stop me from achieving my own happiness and my own life.
-                        </div>
-                    </div>
-                )
-            }
-        });
-
-        // AboutPage Component
-        var AboutPage = React.createClass({
-            render: function() {
-                return(
-                    <div className="container">
-                        <div className="row">
-                            <h2 className='page-header'>This is about me and my life.</h2>
-                            <p>I am happy everyday!!!</p>
-                        </div>
-                    </div>
-                )
-            }
-        });
-
-        // Footer Component
-        var Footer = React.createClass({
-            getDefaultProps: function(){
-                return {
-                    website: 'React Experiment',
-                    copy_year: 2016
-                }
-            },
-            render: function() {
+            render: function(){
                 return (
                     <div>
-                        <hr />
-                        <footer>
-                            <p>&copy; {this.props.copy_year} {this.props.website}</p>
+                        <div className="jumbotron">
+                            <div className="container">
+                                <h1>{this.props.heading}</h1>
+                                <p>{this.props.text}</p>
+                                <p><a className="btn btn-primary btn-lg" href={this.props.link} role="button">Learn more &raquo;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        });
+
+        var PageHome = React.createClass({
+            propTypes: {
+                content: React.PropTypes.string.isRequired
+            },
+            getDefaultProps: function(){
+                return {
+                    content: 'Everything is just an illusion'
+                }
+            },
+            render: function(){
+                return(
+                    <div className="container">
+                        <div className="row">
+                            {this.props.content}
+                        </div>
+                    </div>
+                )
+            }
+        });
+
+        var Button = React.createClass({
+            propTypes: {
+                content: React.PropTypes.string
+            },
+            getDefaultProps: function(){
+                return {
+                    content: "This is a button component which was created from scratch by myself!!!"
+                }
+            },
+            render: function(){
+                return(
+                    <div className="container">
+                        <button type="button" className="btn btn-default" aria-label="Left Align">
+                          <span className="glyphicon glyphicon-align-left" aria-hidden="true">{this.props.content}</span>
+                        </button>
+                    </div>
+                )
+            }
+        });
+
+        var Footer = React.createClass({
+            propTypes: {
+                year: React.PropTypes.number,
+                content: React.PropTypes.string
+            },
+            getDefaultProps: function(){
+                return {
+                    year: 2016,
+                    content: "Illusion, Inc."
+                }
+            },
+            render: function(){
+                return(
+                    <div className="container">
+                         <footer>
+                            <p>&copy; {this.props.year} {this.props.content}</p>
                         </footer>
                     </div>
                 )
             }
         });
 
-        // Main App Component
         var App = React.createClass({
-            getInitialState: function() {
-                return {
-                    page: 'home'
-                }
+            getInitialState: function () {
+              return {
+                page: 'home'
+              }
             },
-            handleHomeClick: function() {
-                this.setState({
-                    page: 'home'
-                })
+            handleHomeClick: function(){
+              this.setState({
+                page: 'home'
+              })
             },
-            handleAboutClick: function() {
-                this.setState({
-                    page: 'about'
-                })
+            handleAboutClick: function () {
+              this.setState({
+                page: 'about'
+              })
             },
-            render: function() {
-                if(this.state.page == 'home') {
-                    var jumbotron = <Jumbotron />
-                    var page = <PageHome />
-                } else if(this.state.page = 'about') {
-                    var jumbotron = '';
-                    var page = <AboutPage />
-                }
+            render: function(){
                 return(
                     <div>
                         <Navbar
-                            color='dark'
-                            page={this.state.page}
-                            homeClick={this.handleHomeClick}
-                            aboutClick={this.handleAboutClick}
+                          color="dark"
+                          page={this.state.page}
+                          homeClick={this.handleHomeClick}
+                          aboutClick={this.handleAboutClick}
                         />
-                        {jumbotron}
-                        {page}
+                        <Jumbotron />
+                        <PageHome />
+                        <Button />
+                        <hr />
                         <Footer />
                     </div>
                 )
             }
         });
 
-        ReactDOM.render(
-            <App />, document.getElementById('app')
-        );
-    </script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-    window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')
-    </script>
-    <script>
-    (function(b, o, i, l, e, r) {
-        b.GoogleAnalyticsObject = l;
-        b[l] || (b[l] =
-            function() {
-                (b[l].q = b[l].q || []).push(arguments)
-            });
-        b[l].l = +new Date;
-        e = o.createElement(i);
-        r = o.getElementsByTagName(i)[0];
-        e.src = '//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e, r)
-    }(window, document, 'script', 'ga'));
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById("app")
+        );
     </script>
 </body>
 
