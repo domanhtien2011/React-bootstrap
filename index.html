@@ -99,13 +99,31 @@
             }
         });
 
+        var About = React.createClass({
+          propTypes: {
+            text: React.PropTypes.string
+          },
+          getDefaultProps: function(){
+            return {
+              text: 'This is some information about me, and they are just an illusion. Therefore, just is with care.'
+            }
+          },
+          render: function(){
+            return (
+              <div className="container">
+                {this.props.text}
+              </div>
+            )
+          }
+        });
+
         var PageHome = React.createClass({
             propTypes: {
                 content: React.PropTypes.string.isRequired
             },
             getDefaultProps: function(){
                 return {
-                    content: 'Everything is just an illusion'
+                    content: 'Everything is just an illusion!!!!'
                 }
             },
             render: function(){
@@ -178,6 +196,15 @@
               })
             },
             render: function(){
+                // Separate Home and About Page Content
+                if (this.state.page == 'home') {
+                  var jumbotron = <Jumbotron />
+                  var page = <PageHome />
+                } else if (this.state.page == 'about') {
+                  var jumbotron = '';
+                  var page = <About />
+                }
+
                 return(
                     <div>
                         <Navbar
@@ -186,8 +213,8 @@
                           homeClick={this.handleHomeClick}
                           aboutClick={this.handleAboutClick}
                         />
-                        <Jumbotron />
-                        <PageHome />
+                        {jumbotron}
+                        {page}
                         <Button />
                         <hr />
                         <Footer />
